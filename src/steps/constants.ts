@@ -7,7 +7,8 @@ import {
 export const CLUSTER_ENTITY_DATA_KEY = 'entity:cluster';
 
 export enum IntegrationSteps {
-  CLUSTERS = 'fetch-clusters',
+  FETCH_CLUSTER = 'fetch-cluster',
+  BUILD_CLUSTER_RESOURCES_RELATIONSHIPS = 'build-cluster-resources-relationships',
   NAMESPACES = 'fetch-namespaces',
   NODES = 'fetch-nodes',
   SERVICES = 'fetch-services',
@@ -112,6 +113,7 @@ export const Entities: Record<
 };
 
 export const Relationships: Record<
+  | 'CLUSTER_CONTAINS_NAMESPACE'
   | 'NAMESPACE_CONTAINS_POD'
   | 'NAMESPACE_CONTAINS_SERVICE'
   | 'NAMESPACE_CONTAINS_DEPLOYMENT'
@@ -131,6 +133,12 @@ export const Relationships: Record<
   | 'POD_CONTAINS_CONTAINER',
   StepRelationshipMetadata
 > = {
+  CLUSTER_CONTAINS_NAMESPACE: {
+    _type: 'kube_cluster_contains_namespace',
+    _class: RelationshipClass.CONTAINS,
+    sourceType: Entities.CLUSTER._type,
+    targetType: Entities.NAMESPACE._type,
+  },
   NAMESPACE_CONTAINS_POD: {
     _type: 'kube_namespace_contains_pod',
     _class: RelationshipClass.CONTAINS,
