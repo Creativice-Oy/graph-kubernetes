@@ -26,11 +26,13 @@
     "prepack": "yarn build"
   },
   "devDependencies": {
-    "@jupiterone/integration-sdk-testing": "^6.7.1"
+    "@jupiterone/integration-sdk-testing": "^6.7.1",
+    "@types/node-fetch": "^3.0.3"
   },
   "dependencies": {
     "@jupiterone/integration-sdk-core": "^6.7.1",
     "@jupiterone/integration-sdk-dev-tools": "^6.7.1",
-    "@kubernetes/client-node": "^0.14.3"
+    "@kubernetes/client-node": "^0.14.3",
+    "node-fetch": "2.6.1"
   }
 }

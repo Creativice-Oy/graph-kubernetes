@@ -9,7 +9,8 @@ export const CLUSTER_ENTITY_DATA_KEY = 'entity:cluster';
 export enum IntegrationSteps {
   FETCH_CLUSTER = 'fetch-cluster',
   BUILD_CLUSTER_RESOURCES_RELATIONSHIPS = 'build-cluster-resources-relationships',
-  BUILD_CLUSTER_CLOUD_PROVIDERS_RELATIONSHIPS = 'build-cluster-cloud-providers-relationships',
+  BUILD_CLUSTER_AKS_RELATIONSHIPS = 'build-cluster-aks-relationships',
+  BUILD_CLUSTER_GKE_RELATIONSHIPS = 'build-cluster-gke-relationships',
   NAMESPACES = 'fetch-namespaces',
   NODES = 'fetch-nodes',
   SERVICES = 'fetch-services',
@@ -116,6 +117,7 @@ export const Entities: Record<
 export const Relationships: Record<
   | 'CLUSTER_CONTAINS_NAMESPACE'
   | 'CLUSTER_IS_AKS_CLUSTER'
+  | 'CLUSTER_IS_GKE_CLUSTER'
   | 'NAMESPACE_CONTAINS_POD'
   | 'NAMESPACE_CONTAINS_SERVICE'
   | 'NAMESPACE_CONTAINS_DEPLOYMENT'
@@ -142,6 +144,12 @@ export const Relationships: Record<
     targetType: Entities.NAMESPACE._type,
   },
   CLUSTER_IS_AKS_CLUSTER: {
+    _type: 'kube_cluster_is_cluster',
+    _class: RelationshipClass.IS,
+    sourceType: Entities.CLUSTER._type,
+    targetType: Entities.CLUSTER._type,
+  },
+  CLUSTER_IS_GKE_CLUSTER: {
     _type: 'kube_cluster_is_cluster',
     _class: RelationshipClass.IS,
     sourceType: Entities.CLUSTER._type,
