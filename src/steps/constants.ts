@@ -31,6 +31,7 @@ export const Entities: Record<
   | 'NODE'
   | 'SERVICE'
   | 'DEPLOYMENT'
+  | 'CONTAINER_SPEC'
   | 'REPLICASET'
   | 'STATEFULSET'
   | 'DAEMONSET'
@@ -56,6 +57,11 @@ export const Entities: Record<
     _type: 'kube_deployment',
     _class: ['Deployment'],
     resourceName: 'Kubernetes Deployment',
+  },
+  CONTAINER_SPEC: {
+    _type: 'kube_container_spec',
+    _class: ['Configuration'],
+    resourceName: 'Kubernetes Container Spec',
   },
   REPLICASET: {
     _type: 'kube_replica_set',
@@ -129,6 +135,7 @@ export const Relationships: Record<
   | 'NAMESPACE_CONTAINS_CONFIGMAP'
   | 'NAMESPACE_CONTAINS_SECRET'
   | 'DEPLOYMENT_MANAGES_REPLICASET'
+  | 'DEPLOYMENT_USES_CONTAINER_SPEC'
   | 'REPLICASET_MANAGES_POD'
   | 'STATEFULSET_MANAGES_POD'
   | 'CRONJOB_MANAGES_JOB'
@@ -220,6 +227,12 @@ export const Relationships: Record<
     _class: RelationshipClass.MANAGES,
     sourceType: Entities.DEPLOYMENT._type,
     targetType: Entities.REPLICASET._type,
+  },
+  DEPLOYMENT_USES_CONTAINER_SPEC: {
+    _type: 'kube_deployment_uses_container_spec',
+    _class: RelationshipClass.USES,
+    sourceType: Entities.DEPLOYMENT._type,
+    targetType: Entities.CONTAINER_SPEC._type,
   },
   REPLICASET_MANAGES_POD: {
     _type: 'kube_replica_set_manages_pod',
